@@ -1,0 +1,45 @@
+{
+    "candidatos" : [
+        {
+            "candidato" : {
+                "nombre" : "Laura Donado",
+                "documento" : "123456789",
+                "aspiracion" : "2000",
+                "nivelEstudios" : "PROFESIONAL",
+                "experiencias" : [
+                	{
+	                    "empleo":{
+	                    	"cargo": "desarrollador",
+	                    	"duracion" : "3",
+	                    	"sectorEmpresa": "MANUFACTURA"
+	                    }
+                    }
+                ]
+            }
+        },
+        {
+            "candidato" : {
+                "nombre" : "Santiago Lizarazo",
+                "documento" : "987654321",
+                "aspiracion" : "1500",
+                "nivelEstudios" : "PROFESIONAL",
+                "experiencias" : [
+                	{
+	                    "empleo":{
+	                    	"cargo": "desarrollador",
+	                    	"duracion" : "1",
+	                    	"sectorEmpresa": "MANUFACTURA"
+	                    }
+                    },
+                    {
+	                    "empleo":{
+	                    	"cargo": "contador",
+	                    	"duracion" : "1",
+	                    	"sectorEmpresa": "FINANCIERO"
+	                    }
+                    }
+                ]
+            }
+        }
+    ]
+}
