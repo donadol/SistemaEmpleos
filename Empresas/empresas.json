@@ -1,0 +1,54 @@
+{
+    "empresas" : [
+        {
+            "empresa" : {
+                "nombre" : "Endava",
+                "ofertas" : [
+                	{
+	                    "oferta":{
+	                    	"cargo": "desarrollador",
+	                    	"salario": "1000",
+	                    	"experiencia": "1",
+	                    	"nivelEstudios": "TECNICO",
+	                    	"sectorEmpresa": "MANUFACTURA"
+	                    }
+                    },
+                    {
+	                    "oferta":{
+	                    	"cargo": "vendedor",
+	                    	"salario": "2000",
+	                    	"experiencia": "3",
+	                    	"nivelEstudios": "PROFESIONAL",
+	                    	"sectorEmpresa": "COMERCIO"
+	                    }
+	                }
+                ]
+            }
+        },
+        {
+            "empresa" : {
+                "nombre" : "Exito",
+                "ofertas" : [
+                    {
+                        "oferta":{
+                            "cargo": "vendedor",
+                            "salario": "1000",
+                            "experiencia": "1",
+                            "nivelEstudios": "SECUNDARIA",
+                            "sectorEmpresa": "COMERCIO"
+                        }
+                    },
+                    {
+                        "oferta":{
+                            "cargo": "contador",
+                            "salario": "3000",
+                            "experiencia": "3",
+                            "nivelEstudios": "POSGRADO",
+                            "sectorEmpresa": "FINANCIERO"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
