@@ -8,8 +8,8 @@ public class Candidato {
 	public String documento;
 	public long aspiracionSalarial;
 	public NivelEstudios nivelEstudios;
-	List<Empleo> experiencias;
-	List<Solicitud> solicidutes;
+	public List<Empleo> experiencias;
+	public List<Solicitud> solicidutes;
 	public Candidato(String nombre, String documento, long aspiracionSalarial, NivelEstudios nivelEstudios,
 			List<Empleo> experiencias) {
 		super();
