@@ -1,8 +1,8 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,12 +13,15 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import entidadesTransversales.Candidato;
 import entidadesTransversales.Empresa;
 import utils.Utils;
 
 public class FrameEmpresa extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	private JLabel bienvenido;
@@ -26,21 +29,23 @@ public class FrameEmpresa extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * @throws InterruptedException 
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					List<Empresa> empresas = Utils.cargarEmpresas("./empresas.json");
-					for(Empresa e: empresas) {
+	public static void main(String[] args) throws InterruptedException {
+		List<Empresa> empresas = Utils.cargarEmpresas("./empresas.json");
+		for(Empresa e: empresas) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
 						FrameEmpresa frame = new FrameEmpresa(e);
 						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
-			}
-		});
+			});
+			TimeUnit.SECONDS.sleep(10);
+		}
 	}
 
 	/**
@@ -68,7 +73,7 @@ public class FrameEmpresa extends JFrame {
 				new Object[][] {
 				},
 				new String[] {
-					"Nombre", "Documento", "Aspiración salarial"
+					"Id oferta", "Nombre", "Documento", "Aspiración salarial"
 				}
 			));
 		scrollPane.setViewportView(table);
