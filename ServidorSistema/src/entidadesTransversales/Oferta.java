@@ -1,7 +1,9 @@
 package entidadesTransversales;
 
+import java.io.Serializable;
+import java.util.Arrays;
 
-public class Oferta {
+public class Oferta implements Serializable{
 	public int id;
 	public String cargo;
 	public long salario;
@@ -63,4 +65,12 @@ public class Oferta {
 	public void setCitas(Cita[] citas) {
 		this.citas = citas;
 	}
+	@Override
+	public String toString() {
+		return "Oferta [id=" + id + ", cargo=" + cargo + ", salario=" + salario + ", experiencia=" + experiencia
+				+ ", nivelEstudios=" + nivelEstudios + ", sectorEmpresa=" + sectorEmpresa + ", citas="
+				+ Arrays.toString(citas) + "]";
+	}
+	
+	
 }

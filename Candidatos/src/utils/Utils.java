@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,12 +18,12 @@ import entidadesTransversales.NivelEstudios;
 import entidadesTransversales.SectorEmpresa;
 
 public class Utils {
-	public static List<Candidato> cargarCandidatos(String path){
-		List<Candidato> candidatos = new ArrayList<Candidato>();
+	public static ArrayList<Candidato> cargarCandidatos(String path){
+		ArrayList<Candidato> candidatos = new ArrayList<Candidato>();
 		JSONObject jo = new JSONObject(loadJSON(path));
 		JSONArray jsonCandidatos = jo.getJSONArray("candidatos");
 		for(int i = 0; i<jsonCandidatos.length(); ++i) {
-			List<Empleo> empleos = new ArrayList<Empleo>();
+			ArrayList<Empleo> empleos = new ArrayList<Empleo>();
 			String nombre, documento, cargo, nivel, sector;
 			long aspiracion;
 			int duracion; 

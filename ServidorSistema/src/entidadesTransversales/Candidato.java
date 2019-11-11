@@ -1,24 +1,30 @@
 package entidadesTransversales;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Candidato {
+public class Candidato implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	public String nombre;
 	public String documento;
 	public long aspiracionSalarial;
 	public NivelEstudios nivelEstudios;
-	public List<Empleo> experiencias;
-	public List<Solicitud> solicidutes;
+	public ArrayList<Empleo> experiencias;
+	public ArrayList<Solicitud> solicitudes;
+	
 	public Candidato(String nombre, String documento, long aspiracionSalarial, NivelEstudios nivelEstudios,
-			List<Empleo> experiencias) {
+			ArrayList<Empleo> experiencias) {
 		super();
 		this.nombre = nombre;
 		this.documento = documento;
 		this.aspiracionSalarial = aspiracionSalarial;
 		this.nivelEstudios = nivelEstudios;
 		this.experiencias = experiencias;
-		this.solicidutes = new ArrayList<Solicitud>();
+		this.solicitudes = new ArrayList<Solicitud>();
 	}
 	public String getNombre() {
 		return nombre;
@@ -44,16 +50,28 @@ public class Candidato {
 	public void setNivelEstudios(NivelEstudios nivelEstudios) {
 		this.nivelEstudios = nivelEstudios;
 	}
-	public List<Empleo> getExperiencias() {
+	
+	public ArrayList<Empleo> getExperiencias() {
 		return experiencias;
 	}
-	public void setExperiencias(List<Empleo> experiencias) {
+	public void setExperiencias(ArrayList<Empleo> experiencias) {
 		this.experiencias = experiencias;
 	}
-	public List<Solicitud> getSolicidutes() {
-		return solicidutes;
+	public ArrayList<Solicitud> getSolicidutes() {
+		return solicitudes;
 	}
-	public void setSolicidutes(List<Solicitud> solicidutes) {
-		this.solicidutes = solicidutes;
+	public void setSolicidutes(ArrayList<Solicitud> solicitudes) {
+		this.solicitudes = solicitudes;
 	}
+	
+	@Override
+	public String toString() {
+		return "Candidato [nombre=" + nombre + ", documento=" + documento + ", aspiracionSalarial=" + aspiracionSalarial
+				+ ", nivelEstudios=" + nivelEstudios + ", experiencias=" + experiencias + ", solicitudes=" + solicitudes
+				+ "]";
+	}
+	
+	
+	
+	
 }

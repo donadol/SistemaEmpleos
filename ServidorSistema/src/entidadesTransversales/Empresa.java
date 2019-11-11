@@ -1,8 +1,9 @@
 package entidadesTransversales;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Empresa {
+public class Empresa implements Serializable{
 	public String nombre;
 	public List<Oferta> ofertas;
 	public Empresa(String nombre, List<Oferta> ofertas) {

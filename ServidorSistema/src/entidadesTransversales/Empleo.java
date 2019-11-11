@@ -1,6 +1,8 @@
 package entidadesTransversales;
 
-public class Empleo {
+import java.io.Serializable;
+
+public class Empleo implements Serializable {
 	public String cargo;
 	public int duracion;
 	public SectorEmpresa sectorEmpresa;

@@ -1,6 +1,8 @@
 package entidadesTransversales;
 
-public enum NivelEstudios {
+import java.io.Serializable;
+
+public enum NivelEstudios implements Serializable{
 	PRIMARIA,
 	SECUNDARIA,
 	TECNICO,
