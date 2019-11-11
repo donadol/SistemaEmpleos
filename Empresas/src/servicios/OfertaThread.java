@@ -30,7 +30,6 @@ public class OfertaThread implements Runnable{
 				frame.actualizarTable(c, id);
 			}
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
