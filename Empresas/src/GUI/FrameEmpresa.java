@@ -69,7 +69,7 @@ public class FrameEmpresa extends JFrame {
 	}
 	public JPanel createPanel(Oferta oferta) {
 		JPanel panel = new JPanel();
-		JLabel lblOferta = new JLabel("Oferta: "+oferta.id);
+		JLabel lblOferta = new JLabel("Oferta: "+oferta.getId());
 		JScrollPane scrollPane = new JScrollPane();
 		JTable table = new JTable();
 		GridBagLayout gbl_panel = new GridBagLayout();

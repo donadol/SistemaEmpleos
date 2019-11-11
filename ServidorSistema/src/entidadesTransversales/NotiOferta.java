@@ -19,7 +19,4 @@ public class NotiOferta implements Serializable{
 	public void setCandidatos(ArrayList<Candidato> candidatos) {
 		this.candidatos = candidatos;
 	}
-	
-	
-	
 }
