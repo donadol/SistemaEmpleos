@@ -30,7 +30,6 @@ public class Main {
 			System.err.println("Server exception" + e.toString());
 			e.printStackTrace();
 		}
-		// TODO Auto-generated method stub
 	}
 
 }
