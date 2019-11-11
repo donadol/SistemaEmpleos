@@ -1,9 +1,7 @@
 package GUI;
 
-import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,9 +12,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import entidadesTransversales.Candidato;
 import entidadesTransversales.Empresa;
 import entidadesTransversales.Oferta;
-import utils.Utils;
 import javax.swing.JTabbedPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -32,31 +30,10 @@ public class FrameEmpresa extends JFrame {
 	private static List<JTable> tables;
 
 	/**
-	 * Launch the application.
-	 * @throws InterruptedException 
-	 */
-	public static void main(String[] args) throws InterruptedException {
-		tables = new ArrayList<JTable>();
-		List<Empresa> empresas = Utils.cargarEmpresas("./empresas.json");
-		for(Empresa e: empresas) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						FrameEmpresa frame = new FrameEmpresa(e);
-						frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-			TimeUnit.SECONDS.sleep(10);
-		}
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public FrameEmpresa(Empresa empresa) {
+		tables = new ArrayList<JTable>();
 		setTitle(empresa.getNombre());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -84,8 +61,8 @@ public class FrameEmpresa extends JFrame {
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
 		gbc_tabbedPane.gridy = 1;
-		for(int i =0; i<empresa.getOfertas().size(); ++i) {
-			tabbedPane.addTab("Tab "+(i+1), null, createPanel(empresa.getOfertas().get(i)), "Oferta: "+empresa.getOfertas().get(i).getId());
+		for(Oferta o: empresa.getOfertas()) {
+			tabbedPane.addTab("Oferta "+o.getId(), null, createPanel(o), "Oferta: "+o.getId());
 		}
 		contentPane.add(tabbedPane, gbc_tabbedPane);
 		
@@ -137,5 +114,9 @@ public class FrameEmpresa extends JFrame {
 		tables.add(table);
 		
 		return panel;
+	}
+	public void actualizarTable(Candidato candidato, int tabla) {
+		DefaultTableModel tableModel = (DefaultTableModel) tables.get(tabla).getModel();
+		tableModel.addRow(new Object[] {candidato.getNombre(), candidato.getDocumento(), candidato.getAspiracionSalarial()});
 	}
 }
