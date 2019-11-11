@@ -73,7 +73,7 @@ public class FrameCandidato extends JFrame {
 				new Object[][] {
 				},
 				new String[] {
-					"Empresa", "Cargo", "Salario"
+					"Id oferta", "Empresa", "Cargo", "Salario"
 				}
 			));
 		scrollPane.setViewportView(table);
