@@ -1,6 +1,7 @@
 package estadoSistema;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import entidadesTransversales.Candidato;
 
@@ -8,11 +9,15 @@ public class SingletonCandidatos {
 	
 	private static SingletonCandidatos instance  = new SingletonCandidatos();
 	
-	private static ArrayList<Candidato> listaCandidatos;
+	private ArrayList<Candidato> listaCandidatos;
 	
+	private Date lastWriteTS;
+	private Date lastReadTS;
 	
 	private SingletonCandidatos() {
 		listaCandidatos = new ArrayList<>();
+		lastWriteTS = new Date();
+		lastReadTS = new Date();
 	};
 	
 	public static SingletonCandidatos getInstance() {
@@ -23,12 +28,28 @@ public class SingletonCandidatos {
 		SingletonCandidatos.instance = instance;
 	}
 
-	public static ArrayList<Candidato> getListaCandidatos() {
+	public ArrayList<Candidato> getListaCandidatos() {
 		return listaCandidatos;
 	}
 
-	public static void setListaCandidatos(ArrayList<Candidato> listaCandidatos) {
-		SingletonCandidatos.listaCandidatos = listaCandidatos;
+	public void setListaCandidatos(ArrayList<Candidato> listaCandidatos) {
+		this.listaCandidatos = listaCandidatos;
+	}
+
+	public Date getLastWriteTS() {
+		return lastWriteTS;
+	}
+
+	public void setLastWriteTS(Date lastWriteTS) {
+		this.lastWriteTS = lastWriteTS;
+	}
+
+	public Date getLastReadTS() {
+		return lastReadTS;
+	}
+
+	public void setLastReadTS(Date lastReadTS) {
+		this.lastReadTS = lastReadTS;
 	}
 	
 }

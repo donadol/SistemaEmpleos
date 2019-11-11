@@ -33,7 +33,7 @@ public class EmpresaMain {
 			e.printStackTrace();
 		}
 		for(int i1=0; i1<empresa.getOfertas().size();++i1) {
-			OfertaThread ofertaThread = new OfertaThread(i1, frameEmpresa, interfaz, empresa.getOfertas().get(i));
+			OfertaThread ofertaThread = new OfertaThread(i1, frameEmpresa, interfaz, empresa.getOfertas().get(i1));
 			ofertaThread.run();
 		}
 	}
