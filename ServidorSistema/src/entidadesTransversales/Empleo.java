@@ -3,9 +3,9 @@ package entidadesTransversales;
 import java.io.Serializable;
 
 public class Empleo implements Serializable {
-	public String cargo;
-	public int duracion;
-	public SectorEmpresa sectorEmpresa;
+	private String cargo;
+	private int duracion;
+	private SectorEmpresa sectorEmpresa;
 	public Empleo(String cargo, int duracion, SectorEmpresa sectorEmpresa) {
 		super();
 		this.cargo = cargo;

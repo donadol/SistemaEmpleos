@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class Oferta implements Serializable{
-	public int id;
-	public String cargo;
-	public long salario;
-	public int experiencia;
-	public NivelEstudios nivelEstudios;
-	public SectorEmpresa sectorEmpresa;
-	public Cita[] citas;
+	private int id;
+	private String cargo;
+	private long salario;
+	private int experiencia;
+	private NivelEstudios nivelEstudios;
+	private SectorEmpresa sectorEmpresa;
+	private Cita[] citas;
 	
 	public Oferta(int id, String cargo, long salario, int experiencia, NivelEstudios nivelEstudios,
 			SectorEmpresa sectorEmpresa) {

@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Empresa implements Serializable{
-	public String nombre;
-	public List<Oferta> ofertas;
+	private String nombre;
+	private List<Oferta> ofertas;
 	public Empresa(String nombre, List<Oferta> ofertas) {
 		super();
 		this.nombre = nombre;

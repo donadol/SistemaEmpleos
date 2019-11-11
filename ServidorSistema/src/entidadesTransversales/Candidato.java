@@ -4,17 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Candidato implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	public String nombre;
-	public String documento;
-	public long aspiracionSalarial;
-	public NivelEstudios nivelEstudios;
-	public ArrayList<Empleo> experiencias;
-	public ArrayList<Solicitud> solicitudes;
+	private String nombre;
+	private String documento;
+	private long aspiracionSalarial;
+	private NivelEstudios nivelEstudios;
+	private ArrayList<Empleo> experiencias;
+	private ArrayList<Solicitud> solicitudes;
 	
 	public Candidato(String nombre, String documento, long aspiracionSalarial, NivelEstudios nivelEstudios,
 			ArrayList<Empleo> experiencias) {
