@@ -9,7 +9,6 @@ public class Candidato implements Serializable{
 	private long aspiracionSalarial;
 	private NivelEstudios nivelEstudios;
 	private ArrayList<Empleo> experiencias;
-	private ArrayList<Solicitud> solicitudes;
 	
 	public Candidato(String nombre, String documento, long aspiracionSalarial, NivelEstudios nivelEstudios,
 			ArrayList<Empleo> experiencias) {
@@ -19,7 +18,6 @@ public class Candidato implements Serializable{
 		this.aspiracionSalarial = aspiracionSalarial;
 		this.nivelEstudios = nivelEstudios;
 		this.experiencias = experiencias;
-		this.solicitudes = new ArrayList<Solicitud>();
 	}
 	public String getNombre() {
 		return nombre;
@@ -52,18 +50,11 @@ public class Candidato implements Serializable{
 	public void setExperiencias(ArrayList<Empleo> experiencias) {
 		this.experiencias = experiencias;
 	}
-	public ArrayList<Solicitud> getSolicidutes() {
-		return solicitudes;
-	}
-	public void setSolicidutes(ArrayList<Solicitud> solicitudes) {
-		this.solicitudes = solicitudes;
-	}
-	
+
 	@Override
 	public String toString() {
 		return "Candidato [nombre=" + nombre + ", documento=" + documento + ", aspiracionSalarial=" + aspiracionSalarial
-				+ ", nivelEstudios=" + nivelEstudios + ", experiencias=" + experiencias + ", solicitudes=" + solicitudes
-				+ "]";
+				+ ", nivelEstudios=" + nivelEstudios + ", experiencias=" + experiencias + "]";
 	}
 	
 	
