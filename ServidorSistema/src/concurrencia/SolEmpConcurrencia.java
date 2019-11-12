@@ -2,13 +2,16 @@ package concurrencia;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import entidadesTransversales.Candidato;
 import entidadesTransversales.NotiCandidato;
+import entidadesTransversales.Oferta;
 import estadoSistema.SingletonCandidatos;
+import estadoSistema.SingletonCitas;
 
 public class SolEmpConcurrencia {
 	private static final ExecutorService pool;
@@ -51,6 +54,7 @@ class HandlerSolEmp implements Callable<NotiCandidato> {
 			
 			if(myTS.compareTo(SingletonCandidatos.getInstance().getLastWriteTS() ) < 0 ) {
 				//reject read request and abort corresponding transaction
+				continue;
 			} else {
 				mList = SingletonCandidatos.getInstance().getListaCandidatos();
 				Date maxi = SingletonCandidatos.getInstance().getLastReadTS().compareTo(myTS) > 0 ?
@@ -69,13 +73,43 @@ class HandlerSolEmp implements Callable<NotiCandidato> {
 			}			
 		}
 		
+		NotiCandidato resp = null;
+		
+		boolean gotEmpleo = false;
+		while(gotEmpleo == false) {
+			
+			Date myTS = new Date();
+			
+			if(myTS.compareTo(SingletonCitas.getInstance().getLastWriteTS() ) < 0 ) {
+				//reject read request and abort corresponding transaction
+				continue;
+			} else {
+				Entry<Candidato, Oferta> mVal = 
+						SingletonCitas.getInstance().getListaCitas().get(this.cand.getDocumento());
+						
+				if( mVal != null) {
+					resp = new NotiCandidato(mVal.getValue().getNombreEmpresa(),mVal.getValue().getId(),
+							mVal.getValue().getCargo(), mVal.getValue().getSalario());
+					gotEmpleo=true;
+					break;
+				}
+				
+				Date maxi = SingletonCitas.getInstance().getLastReadTS().compareTo(myTS) > 0 ?
+						SingletonCitas.getInstance().getLastReadTS() :
+							myTS;
+				SingletonCitas.getInstance().setLastReadTS(maxi);
+			}
+			
+			Thread.sleep(1500);
+		}
+		/*
 		for(Candidato c : SingletonCandidatos.getInstance().getListaCandidatos()) {
 			System.out.println(c.toString());
 		}
-		
+		*/
 		
 		
 		// TODO Auto-generated method stub
-		return new NotiCandidato("endava", 321, "asistonto", 3000);
+		return resp;
 	}
 }

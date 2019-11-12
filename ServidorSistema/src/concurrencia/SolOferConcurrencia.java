@@ -32,6 +32,22 @@ public class SolOferConcurrencia {
 		
 		return resp;
 	}
+	//TODO, CONSULTAR LOS CANDIDATOS HASTA QUE SEA <3
+	/*
+	 * 
+	 
+	public static NotiOferta runConsulOferta(Oferta ofer) {
+		NotiOferta resp = null;
+		try {
+			HandlerConsultarOfer thread = new HandlerConsultarOfer();
+			resp = thread.call();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return null;
+	}
+	*/
 }
 
 class HandlerSolOfer implements Callable<NotiOferta> {
@@ -55,6 +71,7 @@ class HandlerSolOfer implements Callable<NotiOferta> {
 			
 			if(myTS.compareTo(SingletonOfertas.getInstance().getLastWriteTS() ) < 0 ) {
 				//reject read request and abort corresponding transaction
+				continue;
 			} else {
 				mList = SingletonOfertas.getInstance().getOfertas();
 				Date maxi = SingletonOfertas.getInstance().getLastReadTS().compareTo(myTS) > 0 ?

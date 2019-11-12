@@ -6,6 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import RMIServer.SolicitudEmpleo;
 import RMIServer.SolicitudOferta;
+import concurrencia.AsignacionCitas;
 import interfaces.ISolicitudEmpleo;
 import interfaces.ISolicitudOferta;
 
@@ -26,6 +27,9 @@ public class Main {
 			registry.bind("SolOferta", stub_solOfer);
 			
 			System.err.println("Server Ready");
+			
+			AsignacionCitas.serviceAsignacion();
+			
 		} catch (Exception e) {
 			System.err.println("Server exception" + e.toString());
 			e.printStackTrace();

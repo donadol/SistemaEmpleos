@@ -4,7 +4,7 @@
             "candidato" : {
                 "nombre" : "Laura Donado",
                 "documento" : "123456789",
-                "aspiracion" : "2000",
+                "aspiracion" : "1000",
                 "nivelEstudios" : "PROFESIONAL",
                 "experiencias" : [
                 	{
@@ -34,12 +34,63 @@
                     {
 	                    "empleo":{
 	                    	"cargo": "contador",
-	                    	"duracion" : "1",
+	                    	"duracion" : "10",
 	                    	"sectorEmpresa": "FINANCIERO"
 	                    }
                     }
                 ]
             }
+        },
+        {
+        	"candidato" :{
+        		"nombre" : "Jhonny Parra",
+        		"documento" : "51235",
+        		"aspiracion" : "3200",
+        		"nivelEstudios" : "POSGRADO",
+        		"experiencias" : [
+        			{
+        				"empleo":{
+        					"cargo": "desarrollador",
+        					"duracion": "20",
+        					"sectorEmpresa": "MANUFACTURA"
+        				}
+        			}
+        		]
+        	}
+        },
+        {
+        	"candidato" :{
+        		"nombre" : "Pipe Paez",
+        		"documento" : "64323",
+        		"aspiracion" : "800",
+        		"nivelEstudios" : "POSGRADO",
+        		"experiencias" : [
+        			{
+        				"empleo":{
+        					"cargo": "desarrollador",
+        					"duracion": "20",
+        					"sectorEmpresa": "MANUFACTURA"
+        				}
+        			}
+        		]
+        	}
+        },
+        {
+        	"candidato" :{
+        		"nombre" : "El pollo Pepe",
+        		"documento" : "846259713",
+        		"aspiracion" : "800",
+        		"nivelEstudios" : "POSGRADO",
+        		"experiencias" : [
+        			{
+        				"empleo":{
+        					"cargo": "vendedor",
+        					"duracion": "5",
+        					"sectorEmpresa": "MANUFACTURA"
+        				}
+        			}
+        		]
+        	}
         }
     ]
 }

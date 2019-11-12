@@ -3,6 +3,8 @@ package servicios;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import entidadesTransversales.Candidato;
@@ -12,7 +14,15 @@ import utils.Utils;
 public class CandidatoMain {
 	static ISolicitudEmpleo interfaz;
 
+	private static final ExecutorService pool;
+	static {
+		pool = Executors.newFixedThreadPool(25);
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
+		
+		
+		
 		try {
 			Registry registry = LocateRegistry.getRegistry();
 			interfaz = (ISolicitudEmpleo) registry.lookup("SolEmpleo");
@@ -23,7 +33,8 @@ public class CandidatoMain {
 		List<Candidato> candidatos = Utils.cargarCandidatos("./candidatos.json");
 		for(Candidato c: candidatos) {
 			CandidatoThread candidatoThread = new CandidatoThread(c, interfaz);
-			candidatoThread.run();
+			pool.execute(candidatoThread);
+			//candidatoThread.run();
 			TimeUnit.SECONDS.sleep(5);
 		}
 	}

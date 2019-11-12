@@ -43,7 +43,7 @@ public class Utils {
                 experiencia = Integer.parseInt(ofertaDetails.getString("experiencia"));
                 nivel = ofertaDetails.getString("nivelEstudios");
                 sector = ofertaDetails.getString("sectorEmpresa");
-                ofertas.add(new Oferta(id++, cargo, salario, experiencia, NivelEstudios.valueOf(nivel), SectorEmpresa.valueOf(sector)));
+                ofertas.add(new Oferta(id++, cargo, salario, experiencia, NivelEstudios.valueOf(nivel), SectorEmpresa.valueOf(sector), nombre));
             }
 			empresas.add(new Empresa(nombre, ofertas));
 		}

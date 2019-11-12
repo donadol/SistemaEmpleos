@@ -11,10 +11,12 @@ public class Oferta implements Serializable{
 	private NivelEstudios nivelEstudios;
 	private SectorEmpresa sectorEmpresa;
 	private Cita[] citas;
+	private String nombreEmpresa;
 	
 	public Oferta(int id, String cargo, long salario, int experiencia, NivelEstudios nivelEstudios,
-			SectorEmpresa sectorEmpresa) {
+			SectorEmpresa sectorEmpresa, String nombreEmpresa) {
 		super();
+		this.nombreEmpresa = nombreEmpresa;
 		this.id = id;
 		this.cargo = cargo;
 		this.salario = salario;
@@ -64,6 +66,14 @@ public class Oferta implements Serializable{
 	}
 	public void setCitas(Cita[] citas) {
 		this.citas = citas;
+	}
+	
+	
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
+	}
+	public void setNombreEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
 	}
 	@Override
 	public String toString() {

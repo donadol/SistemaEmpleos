@@ -16,7 +16,7 @@ public class facadeEvaluarCandidatoTest {
 
 	@Test
 	public void testEvaluarCandidato() {
-		Oferta of = new Oferta(1,"gerente",3000, 5,NivelEstudios.PROFESIONAL,SectorEmpresa.COMERCIO);
+		Oferta of = new Oferta(1,"gerente",3000, 5,NivelEstudios.PROFESIONAL,SectorEmpresa.COMERCIO, "globant");
 		Empleo p = new Empleo("gerente",5,SectorEmpresa.COMERCIO);
 		ArrayList<Empleo> lis = new ArrayList<Empleo>();
 		lis.add(p);
@@ -30,7 +30,7 @@ public class facadeEvaluarCandidatoTest {
 	
 	@Test
 	public void testEvaluarCandidatoNoApto() {
-		Oferta of = new Oferta(1,"gerente",3000, 5,NivelEstudios.PROFESIONAL,SectorEmpresa.COMERCIO);
+		Oferta of = new Oferta(1,"gerente",3000, 5,NivelEstudios.PROFESIONAL,SectorEmpresa.COMERCIO, "endava");
 		Empleo p = new Empleo("tecnico",5,SectorEmpresa.COMERCIO);
 		ArrayList<Empleo> lis = new ArrayList<Empleo>();
 		lis.add(p);
@@ -44,7 +44,7 @@ public class facadeEvaluarCandidatoTest {
 	
 	@Test
 	public void testEvaluarCandidatoMejorCandidato() {
-		Oferta of = new Oferta(1,"gerente",3000, 5,NivelEstudios.PROFESIONAL,SectorEmpresa.COMERCIO);
+		Oferta of = new Oferta(1,"gerente",3000, 5,NivelEstudios.PROFESIONAL,SectorEmpresa.COMERCIO, "endava");
 		ArrayList<Empleo> lis = new ArrayList<Empleo>();
 		
 		Empleo p = new Empleo("gerente",6,SectorEmpresa.COMERCIO);
