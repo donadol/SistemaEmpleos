@@ -76,6 +76,8 @@ class HandlerCitas implements Runnable {
 
 				for (Oferta ofer : mListOfer) {
 					if(mCitasOferta == null || ofer == null) continue;
+					System.out.println("trabajando con ofer" + ofer.toString());
+					
 					Map.Entry<Oferta, ArrayList<Candidato>> actuales = mCitasOferta.get(ofer.getId());
 					Candidato mejores[];
 					int puntajes[];
@@ -169,6 +171,7 @@ class HandlerCitas implements Runnable {
 					}
 
 				}
+				System.out.println("Sigo trabajando !" + new Date());
 
 				// TODO FIX WRITE ON HASHMAP
 

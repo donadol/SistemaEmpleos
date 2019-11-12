@@ -6,15 +6,12 @@ import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 import entidadesTransversales.Oferta;
-import entidadesTransversales.SectorEmpresa;
 import estadoSistema.SingletonCitas;
 import estadoSistema.SingletonOfertas;
 import entidadesTransversales.Candidato;
-import entidadesTransversales.Empleo;
-import entidadesTransversales.NivelEstudios;
-import entidadesTransversales.NotiCandidato;
 import entidadesTransversales.NotiOferta;
 
 public class SolOferConcurrencia {
@@ -28,6 +25,7 @@ public class SolOferConcurrencia {
 		try {
 			HandlerSolOfer thread = new HandlerSolOfer(ofer);
 			resp = thread.call();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,6 +42,7 @@ public class SolOferConcurrencia {
 		try {
 			HandlerConsultarOfer thread = new HandlerConsultarOfer(ofer);
 			resp = thread.call();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -101,7 +100,7 @@ class HandlerConsultarOfer implements Callable<NotiOferta> {
 
 class HandlerSolOfer implements Callable<NotiOferta> {
 	
-	private final Oferta ofer;
+	private Oferta ofer;
 	
 	HandlerSolOfer(Oferta c){
 		this.ofer = c;
@@ -111,50 +110,40 @@ class HandlerSolOfer implements Callable<NotiOferta> {
 	public NotiOferta call() throws Exception {
 		
 		// TODO Manejar transaccion de escritura en la lista
-		boolean waiting = true;
 		
 		
-		while(waiting == true) {
+		while(true) {
+			
 			Date myTS = new Date();
 			ArrayList<Oferta> mList = new ArrayList<>();
 			
-			if(myTS.compareTo(SingletonOfertas.getInstance().getLastWriteTS() ) < 0 ) {
+			if(myTS.compareTo(SingletonOfertas.getInstance().getLastWriteTS() ) <= 0 ) {
 				//reject read request and abort corresponding transaction
 				continue;
 			} else {
-				mList = SingletonOfertas.getInstance().getOfertas();
 				Date maxi = SingletonOfertas.getInstance().getLastReadTS().compareTo(myTS) > 0 ?
 						SingletonOfertas.getInstance().getLastReadTS() :
 							myTS;
 				SingletonOfertas.getInstance().setLastReadTS(maxi);
+				mList = SingletonOfertas.getInstance().getOfertas();
 			}
 			
-			if(myTS.compareTo(SingletonOfertas.getInstance().getLastReadTS()) < 0 ||
-					myTS.compareTo(SingletonOfertas.getInstance().getLastWriteTS()) < 0) {
+			
+			Date myTSW = new Date();
+			if(myTSW.compareTo(SingletonOfertas.getInstance().getLastReadTS()) < 0 ||
+					myTSW.compareTo(SingletonOfertas.getInstance().getLastWriteTS()) <= 0) {
 				//reject write request
+				continue;
 			} else {
-				mList.add(this.ofer);
-				SingletonOfertas.getInstance().setLastWriteTS(myTS);
-				waiting = false;
-			}			
+				SingletonOfertas.getInstance().setLastWriteTS(myTSW);
+				mList.add(ofer);
+				//SingletonOfertas.getInstance().setOfertas(mList);
+				
+				break;
+			}
 		}
-		
-		/*
-		for(Oferta c : SingletonOfertas.getInstance().getOfertas()) {
-			System.out.println(c.toString());
-		}
-		*/
-		
-		
 		
 		// TODO Auto-generated method stub
-		
-		Empleo p = new Empleo("gerente",5,SectorEmpresa.COMERCIO);
-		ArrayList<Empleo> lis = new ArrayList<Empleo>();
-		lis.add(p);
-		Candidato cand = new Candidato("Pedro","101851091", 3000, NivelEstudios.PROFESIONAL,lis);
-		ArrayList<Candidato> cands = new ArrayList<>();
-		cands.add(cand);
-		return new NotiOferta(cands);
+		return new NotiOferta(new ArrayList<Candidato>());
 	}
 }

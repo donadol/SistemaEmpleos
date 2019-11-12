@@ -47,6 +47,7 @@ public class EmpresaMain {
 		for(int i1=0; i1<empresa.getOfertas().size();++i1) {
 			OfertaThread ofertaThread = new OfertaThread(i1, frameEmpresa, interfaz, empresa.getOfertas().get(i1));
 			pool.execute(ofertaThread);
+			Thread.sleep(100);
 		}
 	}
 }
