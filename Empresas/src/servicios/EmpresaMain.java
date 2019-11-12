@@ -27,7 +27,9 @@ public class EmpresaMain {
 		
 		
 		try {
-			Registry registry = LocateRegistry.getRegistry();
+			int serverPORT = 1099;
+			String serverIP = "localhost";
+			Registry registry = LocateRegistry.getRegistry(serverIP,serverPORT);
 			interfaz = (ISolicitudOferta)registry.lookup("SolOferta");
 		}catch(Exception e) {
 			System.err.println("Empresa exception: " + e.toString());

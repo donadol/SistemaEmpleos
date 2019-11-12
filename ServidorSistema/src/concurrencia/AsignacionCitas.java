@@ -75,6 +75,7 @@ class HandlerCitas implements Runnable {
 				SingletonCitas.getInstance().setLastReadTS(maxi3);
 
 				for (Oferta ofer : mListOfer) {
+					if(mCitasOferta == null || ofer == null) continue;
 					Map.Entry<Oferta, ArrayList<Candidato>> actuales = mCitasOferta.get(ofer.getId());
 					Candidato mejores[];
 					int puntajes[];
@@ -103,7 +104,7 @@ class HandlerCitas implements Runnable {
 					for (Candidato candi : mListCand) {
 						int mPuntaje = facadeEvaluarCandidato.evaluarCandidato(candi, ofer);
 
-						int minPuntaje = 200;
+						int minPuntaje = 100;
 						int indiceMinPuntaje = -1;
 						for (int i = 0; i < puntajes.length; ++i) {
 							if (puntajes[i] < minPuntaje) {
@@ -113,7 +114,7 @@ class HandlerCitas implements Runnable {
 						}
 						// el puntaje es mayor a 70, es un mejor puntaje que los que ya existen
 						// y además no tiene una cita asignada
-						if (mPuntaje >= 70 && mPuntaje > minPuntaje && mCitas.get(candi.getDocumento()) == null) {
+						if (mPuntaje >= 70 && mPuntaje > minPuntaje && mCitas.get(candi.getDocumento()) == null && indiceMinPuntaje!=-1) {
 							mejores[indiceMinPuntaje] = candi;
 							puntajes[indiceMinPuntaje] = mPuntaje;
 						}

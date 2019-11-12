@@ -24,7 +24,9 @@ public class CandidatoMain {
 		
 		
 		try {
-			Registry registry = LocateRegistry.getRegistry();
+			int serverPORT = 1099;
+			String serverIP = "localhost";
+			Registry registry = LocateRegistry.getRegistry(serverIP,serverPORT);
 			interfaz = (ISolicitudEmpleo) registry.lookup("SolEmpleo");
 		}catch(Exception e) {
 			System.err.println("Candidato exception: " + e.toString());
