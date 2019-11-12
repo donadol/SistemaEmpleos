@@ -25,10 +25,26 @@ public class OfertaThread implements Runnable{
 	@Override
 	public void run() {
 		try {
-			NotiOferta response = interfaz.subscribirOferta(oferta);
-			for(Candidato c: response.getCandidatos()) {
-				frame.actualizarTable(c, id);
-			}
+			interfaz.subscribirOferta(oferta);
+			
+			NotiOferta response;
+			do {
+				 response = interfaz.leerCandidatos(oferta);
+				 frame.clean(id);
+				 for(Candidato c: response.getCandidatos()) {
+						frame.actualizarTable(c, id);
+				}
+				 
+				 try {
+					Thread.sleep(1700);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} while(response.getCandidatos().size()!=3);
+			
+			
+			
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

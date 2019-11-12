@@ -4,6 +4,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import GUI.FrameEmpresa;
 import entidadesTransversales.Empresa;
@@ -15,7 +17,15 @@ public class EmpresaMain {
 	static FrameEmpresa frameEmpresa;
 	static ISolicitudOferta interfaz;
 	static Scanner sc = new Scanner(System.in);
+	
+	private static final ExecutorService pool;
+	static {
+		pool = Executors.newFixedThreadPool(25);
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
+		
+		
 		try {
 			Registry registry = LocateRegistry.getRegistry();
 			interfaz = (ISolicitudOferta)registry.lookup("SolOferta");
@@ -34,7 +44,7 @@ public class EmpresaMain {
 		}
 		for(int i1=0; i1<empresa.getOfertas().size();++i1) {
 			OfertaThread ofertaThread = new OfertaThread(i1, frameEmpresa, interfaz, empresa.getOfertas().get(i1));
-			ofertaThread.run();
+			pool.execute(ofertaThread);
 		}
 	}
 }

@@ -2,16 +2,19 @@ package concurrencia;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import entidadesTransversales.Oferta;
 import entidadesTransversales.SectorEmpresa;
+import estadoSistema.SingletonCitas;
 import estadoSistema.SingletonOfertas;
 import entidadesTransversales.Candidato;
 import entidadesTransversales.Empleo;
 import entidadesTransversales.NivelEstudios;
+import entidadesTransversales.NotiCandidato;
 import entidadesTransversales.NotiOferta;
 
 public class SolOferConcurrencia {
@@ -33,21 +36,67 @@ public class SolOferConcurrencia {
 		return resp;
 	}
 	//TODO, CONSULTAR LOS CANDIDATOS HASTA QUE SEA <3
-	/*
-	 * 
+	
+	 
 	 
 	public static NotiOferta runConsulOferta(Oferta ofer) {
 		NotiOferta resp = null;
 		try {
-			HandlerConsultarOfer thread = new HandlerConsultarOfer();
+			HandlerConsultarOfer thread = new HandlerConsultarOfer(ofer);
 			resp = thread.call();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		return null;
+		
+		return resp;
 	}
-	*/
+	
+}
+
+class HandlerConsultarOfer implements Callable<NotiOferta> {
+	
+	private final Oferta ofer;
+	
+	HandlerConsultarOfer(Oferta c){
+		this.ofer = c;
+	}
+
+	@Override
+	public NotiOferta call() throws Exception {
+		NotiOferta resp = null;
+		
+		boolean gotData = false;
+		while(gotData == false) {
+			
+			Date myTS = new Date();
+			
+			if(myTS.compareTo(SingletonCitas.getInstance().getLastWriteTS() ) < 0 ) {
+				//reject read request and abort corresponding transaction
+				continue;
+			} else {
+				Entry<Oferta, ArrayList<Candidato> > mVal = 
+						SingletonCitas.getInstance().getListaCitasOfertas().get(ofer.getId());
+						
+				if( mVal != null) {
+					resp = new NotiOferta(mVal.getValue());
+					gotData=true;
+					break;
+				}
+				
+				Date maxi = SingletonCitas.getInstance().getLastReadTS().compareTo(myTS) > 0 ?
+						SingletonCitas.getInstance().getLastReadTS() :
+							myTS;
+				SingletonCitas.getInstance().setLastReadTS(maxi);
+			}
+			
+			Thread.sleep(1500);
+		}
+		
+		// TODO Auto-generated method stub
+		return resp;
+	}
+	
 }
 
 class HandlerSolOfer implements Callable<NotiOferta> {
@@ -90,10 +139,11 @@ class HandlerSolOfer implements Callable<NotiOferta> {
 			}			
 		}
 		
-		
+		/*
 		for(Oferta c : SingletonOfertas.getInstance().getOfertas()) {
 			System.out.println(c.toString());
 		}
+		*/
 		
 		
 		

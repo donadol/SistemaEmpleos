@@ -21,9 +21,10 @@ public class SolicitudOferta implements ISolicitudOferta {
 	//TODO
 	@Override
 	public NotiOferta leerCandidatos(Oferta ofer) throws RemoteException {
+		
 		// TODO Auto-generated method stub
-		//return SolOferConcurrencia.runConsulOferta(ofer);
-		return null;
+		return SolOferConcurrencia.runConsulOferta(ofer);
+		//return null;
 	}
 	
 }

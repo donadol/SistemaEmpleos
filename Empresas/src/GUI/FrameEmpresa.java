@@ -116,7 +116,16 @@ public class FrameEmpresa extends JFrame {
 		return panel;
 	}
 	public void actualizarTable(Candidato candidato, int tabla) {
+		
 		DefaultTableModel tableModel = (DefaultTableModel) tables.get(tabla).getModel();
+		
 		tableModel.addRow(new Object[] {candidato.getNombre(), candidato.getDocumento(), candidato.getAspiracionSalarial()});
+	}
+	public void clean(int tabla) {
+		DefaultTableModel tableModel = (DefaultTableModel) tables.get(tabla).getModel();
+		int rowCount = tableModel.getRowCount();
+		for(int i= rowCount -1;i>=0;--i) {
+			tableModel.removeRow(i);
+		}
 	}
 }

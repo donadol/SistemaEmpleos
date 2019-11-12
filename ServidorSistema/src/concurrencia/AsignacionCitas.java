@@ -51,8 +51,8 @@ class HandlerCitas implements Runnable {
 				continue;
 				// reject read request and abort corresponding transaction
 			} else {
-				final ArrayList<Candidato> mListCand = SingletonCandidatos.getInstance().getListaCandidatos();
-				final ArrayList<Oferta> mListOfer = SingletonOfertas.getInstance().getOfertas();
+				final ArrayList<Candidato> mListCand = (ArrayList<Candidato>) SingletonCandidatos.getInstance().getListaCandidatos().clone();
+				final ArrayList<Oferta> mListOfer = (ArrayList<Oferta>) SingletonOfertas.getInstance().getOfertas().clone();
 
 				mCitas = SingletonCitas.getInstance().getListaCitas();
 				mCitasOferta = SingletonCitas.getInstance().getListaCitasOfertas();
